@@ -410,8 +410,7 @@ public:
 
 		vecVisibilityPolygonPoints.resize(distance(vecVisibilityPolygonPoints.begin(), it));
 
-		int nRaysCast2 = vecVisibilityPolygonPoints.size();
-		DrawString(4, 4, "Rays Cast: " + to_string(nRaysCast) + " Rays Drawn: " + to_string(nRaysCast2));
+		
 
 
 		// If drawing rays, set an offscreen texture as our target buffer
@@ -423,7 +422,7 @@ public:
 
 			// Draw "Radial Light" sprite to offscreen buffer, centered around 
 			// source location (the mouse coordinates, buffer is 512x512)
-			DrawSprite(fSourceX - 255, fSourceY - 255, sprLightCast);
+			DrawSprite_SIMD(fSourceX - 255, fSourceY - 255, sprLightCast);
 
 			// Clear offsecreen buffer for rays
 			SetDrawTarget(buffLightRay);
@@ -457,13 +456,15 @@ public:
 
 			// Wherever rays exist in ray sprite, copy over radial light sprite pixels
 			SetDrawTarget(nullptr);
-			for (int x = 0; x < ScreenWidth(); x++)
+			DrawMergeSprite_SIMD({ 0,0 }, buffLightRay, { 0,0 }, buffLightTex, olc::WHITE);
+			/*for (int x = 0; x < ScreenWidth(); x++)
 				for (int y = 0; y < ScreenHeight(); y++)
 					if (buffLightRay->GetPixel(x, y).r > 0)
-						Draw(x, y, buffLightTex->GetPixel(x, y));
+						Draw(x, y, buffLightTex->GetPixel(x, y));*/
 		}
 
-
+		int nRaysCast2 = vecVisibilityPolygonPoints.size();
+		DrawString(4, 4, "Rays Cast: " + to_string(nRaysCast) + " Rays Drawn: " + to_string(nRaysCast2));
 
 		// Draw Blocks from TileMap
 		for (int x = 0; x < nWorldWidth; x++)
