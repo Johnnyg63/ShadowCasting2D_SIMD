@@ -88,7 +88,7 @@ class ShadowCasting2D : public olc::PixelGameEngine
 public:
 	ShadowCasting2D()
 	{
-		sAppName = "ShadowCasting2D";
+		sAppName = "ShadowCasting2D SIMD DEMO";
 	}
 
 private:
