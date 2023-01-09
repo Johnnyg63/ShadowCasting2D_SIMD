@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="ShadowCasting2D_SIMD.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\SimdDemo\SimdDemo\olcPixelGameEngine.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

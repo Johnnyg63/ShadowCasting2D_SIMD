@@ -432,7 +432,7 @@ public:
 			// Draw each triangle in fan
 			for (int i = 0; i < vecVisibilityPolygonPoints.size() - 1; i++)
 			{
-				FillTriangle(
+				FillTriangle_SIMD(
 					fSourceX,
 					fSourceY,
 
@@ -445,7 +445,7 @@ public:
 			}
 
 			// Fan will have one open edge, so draw last point of fan to first
-			FillTriangle(
+			FillTriangle_SIMD(
 				fSourceX,
 				fSourceY,
 
@@ -470,15 +470,15 @@ public:
 			for (int y = 0; y < nWorldHeight; y++)
 			{
 				if (world[y * nWorldWidth + x].exist)
-					FillRect(x * fBlockWidth, y * fBlockWidth, fBlockWidth, fBlockWidth, olc::BLUE);
+					FillRect_SIMD(x * fBlockWidth, y * fBlockWidth, fBlockWidth, fBlockWidth, olc::BLUE);
 			}
 
 		// Draw Edges from PolyMap
 		for (auto& e : vecEdges)
 		{
 			DrawLine(e.sx, e.sy, e.ex, e.ey);
-			FillCircle(e.sx, e.sy, 3, olc::RED);
-			FillCircle(e.ex, e.ey, 3, olc::RED);
+			FillCircle_SIMD(e.sx, e.sy, 3, olc::RED);
+			FillCircle_SIMD(e.ex, e.ey, 3, olc::RED);
 		}
 
 		return true;
